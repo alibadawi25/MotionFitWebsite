@@ -12,7 +12,7 @@
 
   --ink:       #f6f2ec;
   --ink-mute:  #a49c98;
-  --ink-faint: #6f6864;
+  --ink-faint: #8d8681;
 
   --flame:     #ff7a18;
   --flame-2:   #ff9a3d;
@@ -104,6 +104,11 @@ body {
   border-color: var(--line); }
 .btn-ghost:hover { border-color: var(--line-hot); background: rgba(255,122,24,0.08); }
 
+/* ---------- keyboard focus (a11y) ---------- */
+a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline-offset: 3px;
+  border-radius: 8px; }
+.nav-links a:focus-visible { outline-offset: 4px; }
+
 /* ---------- hero ---------- */
 .hero { position: relative; max-width: var(--maxw); margin: 0 auto; padding: clamp(48px,8vw,96px) clamp(20px,5vw,56px);
   display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px,5vw,64px); align-items: center; }
@@ -136,8 +141,9 @@ body {
 .free, .free-b { color: var(--lime); font-weight: 800; letter-spacing: 0.5px; }
 
 .chips { list-style: none; display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
-.chips li { font-size: 13px; font-weight: 600; color: var(--ink-mute);
+.chips li { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--ink-mute);
   padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,0.02); }
+.chips svg { width: 15px; height: 15px; color: var(--flame-2); flex-shrink: 0; }
 
 /* hero art */
 .hero-art { position: relative; min-height: 380px; perspective: 1100px; }
@@ -312,7 +318,8 @@ body {
 
 .notice { margin-top: 30px; padding: 18px 20px; border-radius: 14px; font-size: 14px; color: var(--ink-mute);
   background: rgba(255,122,24,0.07); border: 1px solid var(--line-hot); line-height: 1.6; }
-.notice strong { color: var(--flame-3); display: block; margin-bottom: 4px; }
+.notice strong { color: var(--flame-3); display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.notice strong svg { width: 18px; height: 18px; flex-shrink: 0; }
 .notice b { color: var(--ink); }
 
 .reqs { list-style: none; border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
