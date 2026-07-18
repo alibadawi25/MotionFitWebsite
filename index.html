@@ -21,9 +21,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
 
 <link rel="stylesheet" href="styles.css" />
+<noscript><style>.loader{display:none}</style></noscript>
 </head>
 <body>
 <span id="top" aria-hidden="true"></span>
+
+<!-- ready · set · go preloader -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <span class="loader-word" id="loaderWord">READY</span>
+    <div class="loader-bar"><span id="loaderBar"></span></div>
+  </div>
+</div>
 
 <!-- scroll progress -->
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
@@ -32,12 +41,13 @@
 <div class="bg" aria-hidden="true">
   <div class="bg-grain"></div>
   <div class="bg-ember"></div>
+  <canvas class="bg-embers" id="embers"></canvas>
   <div class="streak streak-1"></div>
   <div class="streak streak-2"></div>
   <div class="streak streak-3"></div>
 </div>
 
-<header class="nav">
+<header class="nav" id="nav">
   <a class="wordmark" href="#top" aria-label="MotionFit home">
     <span class="wordmark-motion">MOTION</span><span class="wordmark-fit">FIT</span>
   </a>
@@ -53,7 +63,7 @@
   <!-- ============ HERO ============ -->
   <section class="hero" id="hero">
     <div class="hero-copy">
-      <p class="eyebrow reveal" style="--d:0ms"><span class="live-dot"></span>Webcam-powered · No controller · Windows</p>
+      <p class="eyebrow reveal" style="--d:0ms"><span class="live-dot"></span><span data-scramble>Webcam-powered · No controller · Windows</span></p>
       <h1 class="reveal" style="--d:80ms">
         YOUR BODY<br />IS THE<br /><span class="hl">CONTROLLER</span>
       </h1>
@@ -144,6 +154,15 @@
     <div class="stat reveal-up" style="--d:240ms"><b>XP</b><span>levels &amp; achievements</span></div>
   </section>
 
+  <!-- kinetic type strip -->
+  <div class="strip" aria-hidden="true" data-dir="-1">
+    <div class="strip-track">
+      MOVE <span class="s-dot">●</span> PLAY <span class="s-dot">●</span> <span class="strip-fill">BURN</span> <span class="s-dot">●</span> REPEAT <span class="s-dot">●</span>
+      MOVE <span class="s-dot">●</span> PLAY <span class="s-dot">●</span> <span class="strip-fill">BURN</span> <span class="s-dot">●</span> REPEAT <span class="s-dot">●</span>
+      MOVE <span class="s-dot">●</span> PLAY <span class="s-dot">●</span> <span class="strip-fill">BURN</span> <span class="s-dot">●</span> REPEAT
+    </div>
+  </div>
+
   <!-- ============ MOTION CAPTURE / TECH ============ -->
   <section class="mocap-band reveal-up">
     <div class="mocap-visual">
@@ -191,11 +210,11 @@
         <rect class="scan" x="112" y="36" width="196" height="3" rx="2" />
       </svg>
       <span class="mocap-rec"><span class="rec-dot"></span>REC</span>
-      <span class="mocap-kp">15 keypoints · locked</span>
+      <span class="mocap-kp" data-scramble>15 keypoints · locked</span>
     </div>
 
     <div class="mocap-copy">
-      <p class="eyebrow">The tech</p>
+      <p class="eyebrow" data-scramble>The tech</p>
       <h2>Real motion capture,<br /><span class="hl">no wearables</span></h2>
       <p class="lede">One ordinary webcam is all it takes. MotionFit reads your whole body in real time — no straps, no sensors, no controllers to charge. Just step in frame and play.</p>
       <ul class="show-feats">
@@ -209,7 +228,7 @@
   <!-- ============ HOW IT WORKS ============ -->
   <section class="how" id="how">
     <header class="section-head">
-      <p class="eyebrow">The setup</p>
+      <p class="eyebrow" data-scramble>The setup</p>
       <h2>Up and moving in<br /><span class="hl">under a minute</span></h2>
     </header>
     <ol class="steps">
@@ -234,17 +253,17 @@
   <!-- ============ SHOWCASE ============ -->
   <section class="showcase" id="showcase">
     <header class="section-head">
-      <p class="eyebrow">See it in motion</p>
+      <p class="eyebrow" data-scramble>See it in motion</p>
       <h2>Three worlds,<br /><span class="hl">one sweat session</span></h2>
     </header>
 
     <div class="show-row reveal-up">
       <div class="show-art">
-        <img src="assets/zombie-run.png" alt="Zombie Run — a runner sprinting away from a zombie through a dusk village" loading="lazy" />
+        <div class="show-img"><img src="assets/zombie-run.png" alt="Zombie Run — a runner sprinting away from a zombie through a dusk village" loading="lazy" /></div>
         <span class="show-badge badge-live">Live</span>
       </div>
       <div class="show-copy">
-        <p class="show-kicker">Cardio · Full-body</p>
+        <p class="show-kicker" data-scramble>Cardio · Full-body</p>
         <h3>Zombie Run</h3>
         <p class="show-desc">A zombie is on your heels and it does <em>not</em> get tired. March hard to hold your lead, then jump, slide and dodge everything the road throws at you. Pure fight-or-flight cardio.</p>
         <ul class="show-feats">
@@ -257,11 +276,11 @@
 
     <div class="show-row reverse reveal-up">
       <div class="show-art">
-        <img src="assets/hurdle-dash.png" alt="Hurdle Dash — four sprinters mid-race in a packed stadium" loading="lazy" />
+        <div class="show-img"><img src="assets/hurdle-dash.png" alt="Hurdle Dash — four sprinters mid-race in a packed stadium" loading="lazy" /></div>
         <span class="show-badge badge-live">Live</span>
       </div>
       <div class="show-copy">
-        <p class="show-kicker">HIIT · Explosive</p>
+        <p class="show-kicker" data-scramble>HIIT · Explosive</p>
         <h3>Hurdle Dash</h3>
         <p class="show-desc">Four lanes, three rivals, one line. Sprint on the spot to build speed, then explode upward to clear each hurdle clean. Short, breathless, all-out — the perfect interval burst.</p>
         <ul class="show-feats">
@@ -274,11 +293,11 @@
 
     <div class="show-row reveal-up">
       <div class="show-art">
-        <img src="assets/open-world.png" alt="Open World — a golden-hour coastline with hills, shore and open sea" loading="lazy" />
+        <div class="show-img"><img src="assets/open-world.png" alt="Open World — a golden-hour coastline with hills, shore and open sea" loading="lazy" /></div>
         <span class="show-badge badge-live">Live</span>
       </div>
       <div class="show-copy">
-        <p class="show-kicker">Low-impact · Endless</p>
+        <p class="show-kicker" data-scramble>Low-impact · Endless</p>
         <h3>Open World</h3>
         <p class="show-desc">No timer, no chase — just move and explore a golden-hour coastline at your own pace. Perfect for a warm-up, a cool-down, or a long easy session. It quietly counts every step and calorie the whole time.</p>
         <ul class="show-feats">
@@ -293,7 +312,7 @@
   <!-- ============ GAMES ============ -->
   <section class="games" id="games">
     <header class="section-head">
-      <p class="eyebrow">The line-up</p>
+      <p class="eyebrow" data-scramble>The line-up</p>
       <h2>Pick your <span class="hl">sweat</span></h2>
     </header>
 
@@ -351,11 +370,20 @@
     </div>
   </section>
 
+  <!-- kinetic type strip -->
+  <div class="strip" aria-hidden="true" data-dir="1">
+    <div class="strip-track">
+      NO CONTROLLER <span class="s-dot">●</span> NO EXCUSES <span class="s-dot">●</span> <span class="strip-fill">JUST SWEAT</span> <span class="s-dot">●</span>
+      NO CONTROLLER <span class="s-dot">●</span> NO EXCUSES <span class="s-dot">●</span> <span class="strip-fill">JUST SWEAT</span> <span class="s-dot">●</span>
+      NO CONTROLLER <span class="s-dot">●</span> NO EXCUSES <span class="s-dot">●</span> <span class="strip-fill">JUST SWEAT</span>
+    </div>
+  </div>
+
   <!-- ============ REQUIREMENTS / DOWNLOAD ============ -->
   <section class="download-band" id="requirements">
     <div class="db-inner">
       <div class="db-copy">
-        <p class="eyebrow">Get moving</p>
+        <p class="eyebrow" data-scramble>Get moving</p>
         <h2>Download <span class="hl">MotionFit</span></h2>
         <p class="lede">Free, for Windows 10 &amp; 11. All you need is a webcam and a bit of room to move.</p>
 
@@ -385,11 +413,21 @@
 </main>
 
 <footer class="foot">
-  <div class="foot-mark"><span class="wordmark-motion">MOTION</span><span class="wordmark-fit">FIT</span></div>
-  <p>Move · Play · Level up. &nbsp;© <span data-year>2026</span> MotionFit.</p>
-  <a class="btn btn-ghost" href="#download" data-download>Download</a>
+  <div class="foot-giant" aria-hidden="true">MOTIONFIT</div>
+  <div class="foot-inner">
+    <div class="foot-mark"><span class="wordmark-motion">MOTION</span><span class="wordmark-fit">FIT</span></div>
+    <p>Move · Play · Level up. &nbsp;© <span data-year>2026</span> MotionFit.</p>
+    <a class="btn btn-ghost" href="#download" data-download>Download</a>
+  </div>
 </footer>
 
-<script src="main.js"></script>
+<!-- custom cursor (fine pointers only) -->
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="vendor/lenis.min.js" defer></script>
+<script src="main.js" defer></script>
 </body>
 </html>

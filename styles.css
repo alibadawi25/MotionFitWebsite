@@ -28,9 +28,30 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
+/* Lenis drives scrolling when active — native smooth would fight it */
+html.lenis-on { scroll-behavior: auto; }
 
 /* offset in-page anchors so the sticky header doesn't cover them */
 .hero, .how, .games, .showcase, .download-band { scroll-margin-top: 88px; }
+
+/* ---------- ready·set·go preloader ---------- */
+.loader { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center;
+  background:
+    radial-gradient(900px 600px at 70% 20%, rgba(255,122,24,0.10), transparent 60%),
+    var(--bg);
+  transition: opacity 0.45s ease, visibility 0.45s; }
+.loader.done { opacity: 0; visibility: hidden; }
+.loader-inner { display: grid; justify-items: center; gap: 34px; }
+.loader-word { font-family: 'Anton', sans-serif; font-size: clamp(56px, 13vw, 150px);
+  line-height: 1; letter-spacing: 4px; text-transform: uppercase; color: var(--ink);
+  opacity: 0; }
+.loader-word.flame { color: var(--flame);
+  text-shadow: 0 0 70px rgba(255,122,24,0.65), 0 0 24px rgba(255,122,24,0.4); }
+.loader-bar { width: min(320px, 58vw); height: 3px; border-radius: 999px;
+  background: rgba(255,255,255,0.08); overflow: hidden; }
+.loader-bar span { display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--flame-3), var(--flame), var(--ember));
+  box-shadow: 0 0 12px rgba(255,122,24,0.8); }
 
 /* ---------- scroll progress ---------- */
 .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
@@ -46,6 +67,21 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+
+/* ---------- custom cursor ---------- */
+.cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; z-index: 300;
+  pointer-events: none; border-radius: 50%; display: none; }
+.cursor-dot { width: 6px; height: 6px; background: var(--flame-2);
+  box-shadow: 0 0 10px rgba(255,154,61,0.9); }
+.cursor-ring { width: 34px; height: 34px; border: 1.5px solid rgba(255,154,61,0.6);
+  transition: width 0.25s var(--ease), height 0.25s var(--ease),
+              border-color 0.25s, background-color 0.25s; }
+.cursor-ring.is-hover { width: 54px; height: 54px; border-color: var(--lime);
+  background-color: rgba(198,255,74,0.07); }
+.cursor-ring.is-down { width: 22px; height: 22px; border-color: var(--flame); }
+html.cursor-on .cursor-dot, html.cursor-on .cursor-ring { display: block; }
+html.cursor-on body, html.cursor-on a, html.cursor-on .btn, html.cursor-on button { cursor: none; }
+@media (pointer: coarse) { .cursor-dot, .cursor-ring { display: none !important; } }
 
 /* ---------- ambient background ---------- */
 .bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; background:
@@ -63,6 +99,9 @@ body {
   filter: blur(20px); animation: pulse 9s var(--ease) infinite; }
 @keyframes pulse { 0%,100%{transform:scale(1);opacity:.85} 50%{transform:scale(1.12);opacity:1} }
 
+/* rising ember particles (canvas, painted by JS) */
+.bg-embers { position: absolute; inset: 0; width: 100%; height: 100%; }
+
 .streak { position: absolute; height: 2px; width: 42vw; border-radius: 999px;
   background: linear-gradient(90deg, transparent, var(--flame), transparent); opacity: 0.16;
   filter: blur(0.5px); transform: rotate(-18deg); }
@@ -76,7 +115,11 @@ body {
   gap: 24px; padding: 18px clamp(20px, 5vw, 56px);
   backdrop-filter: blur(12px);
   background: linear-gradient(180deg, rgba(11,10,12,0.82), rgba(11,10,12,0.35));
-  border-bottom: 1px solid var(--line); }
+  border-bottom: 1px solid var(--line);
+  transition: transform 0.4s var(--ease), padding 0.3s var(--ease), background 0.3s; }
+.nav.is-scrolled { padding-top: 11px; padding-bottom: 11px;
+  background: linear-gradient(180deg, rgba(11,10,12,0.94), rgba(11,10,12,0.78)); }
+.nav.is-hidden { transform: translateY(-103%); }
 
 .wordmark { font-family: 'Anton', sans-serif; font-size: 26px; letter-spacing: 0.5px;
   text-decoration: none; line-height: 1; }
@@ -95,13 +138,20 @@ body {
   border-radius: 12px; letter-spacing: 0.2px; border: 1px solid transparent;
   transition: transform 0.18s var(--ease), box-shadow 0.25s, background 0.25s; }
 
-.btn-primary { padding: 15px 26px; font-size: 16px; color: #1a0f04;
+.btn-primary { position: relative; overflow: hidden; padding: 15px 26px; font-size: 16px; color: #1a0f04;
   background: linear-gradient(135deg, var(--flame-3), var(--flame) 55%, var(--ember));
   box-shadow: 0 12px 34px -10px rgba(255,122,24,0.65), inset 0 1px 0 rgba(255,255,255,0.35); }
 .btn-primary:hover { transform: translateY(-2px) scale(1.02);
   box-shadow: 0 20px 46px -12px rgba(255,122,24,0.8), inset 0 1px 0 rgba(255,255,255,0.4); }
 .btn-primary:active { transform: translateY(0) scale(0.99); }
 .btn-lg { padding: 18px 32px; font-size: 18px; border-radius: 14px; }
+
+/* shine sweep across primary buttons */
+.btn-primary::after { content: ""; position: absolute; top: -4px; bottom: -4px; left: -70%;
+  width: 45%; transform: skewX(-22deg); pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+  transition: left 0.55s var(--ease); }
+.btn-primary:hover::after { left: 135%; }
 
 .btn-ghost { padding: 11px 20px; color: var(--ink); background: rgba(255,255,255,0.04);
   border-color: var(--line); }
@@ -132,6 +182,9 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
 .hero h1 { font-family: 'Anton', sans-serif; font-weight: 400;
   font-size: clamp(52px, 8.2vw, 108px); line-height: 0.92; letter-spacing: 0.5px;
   text-transform: uppercase; margin-bottom: 26px; }
+/* char-slam spans (added by JS) */
+.hero h1 .ch { display: inline-block; will-change: transform; }
+.hero h1 .hl { display: inline-block; }
 .hl { color: transparent; background: linear-gradient(120deg, var(--flame-3), var(--flame) 40%, var(--ember), var(--flame-3));
   background-size: 220% 100%; -webkit-background-clip: text; background-clip: text;
   animation: hlShift 6s var(--ease) infinite; }
@@ -188,7 +241,7 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
   overflow: hidden; padding: 16px 0; }
 .marquee-track { display: inline-flex; align-items: center; gap: 26px; white-space: nowrap;
   font-family: 'Anton', sans-serif; font-size: 22px; letter-spacing: 1.5px; color: var(--ink);
-  animation: march 26s linear infinite; }
+  animation: march 26s linear infinite; will-change: transform; }
 .marquee-track .dot { color: var(--flame); font-size: 12px; }
 @keyframes march { to { transform: translateX(-50%); } }
 
@@ -199,6 +252,18 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
   background: linear-gradient(180deg, var(--panel), rgba(23,20,26,0.4)); }
 .stat b { font-family: 'Anton', sans-serif; font-size: 46px; color: var(--flame-2); line-height: 1; display: block; }
 .stat span { display: block; margin-top: 8px; color: var(--ink-mute); font-weight: 600; font-size: 14px; }
+
+/* ---------- kinetic type strips ---------- */
+.strip { overflow: hidden; padding: clamp(8px,1.6vw,20px) 0; pointer-events: none; user-select: none; }
+.strip-track { white-space: nowrap; width: max-content; will-change: transform;
+  font-family: 'Anton', sans-serif; font-size: clamp(58px, 10vw, 140px); line-height: 1.1;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: transparent; -webkit-text-stroke: 1.5px rgba(246,242,236,0.17); }
+.strip-fill { color: transparent; -webkit-text-stroke: 0;
+  background: linear-gradient(120deg, var(--flame-3), var(--flame) 45%, var(--ember));
+  -webkit-background-clip: text; background-clip: text; }
+.s-dot { font-size: 0.22em; vertical-align: middle; color: var(--flame);
+  -webkit-text-stroke: 0; opacity: 0.85; }
 
 /* ---------- section heads ---------- */
 .section-head { text-align: center; margin-bottom: clamp(36px,5vw,56px); }
@@ -267,6 +332,7 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
 .show-row.reverse .show-art { order: 2; }
 .show-art { position: relative; border-radius: 20px; overflow: hidden; border: 1px solid var(--line-hot);
   box-shadow: var(--shadow); aspect-ratio: 16/9; }
+.show-img { width: 100%; height: 100%; will-change: transform; }
 .show-art img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
 .show-row:hover .show-art img { transform: scale(1.05); }
 .show-art::after { content: ""; position: absolute; inset: 0;
@@ -289,7 +355,7 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
 /* ---------- games ---------- */
 .game-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
 .tilt { transform-style: preserve-3d; will-change: transform; }
-.game-card { border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+.game-card { position: relative; border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
   background: var(--panel); transition: transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.3s; }
 .game-card:hover { transform: translateY(-6px); border-color: var(--line-hot); box-shadow: var(--shadow); }
 .game-shot { aspect-ratio: 16/10; overflow: hidden; border-bottom: 1px solid var(--line); }
@@ -298,6 +364,12 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
 .game-body { padding: 22px 22px 26px; }
 .game-body h3 { font-size: 23px; margin: 12px 0 8px; letter-spacing: 0.2px; }
 .game-body p { color: var(--ink-mute); font-size: 14.5px; }
+
+/* pointer-tracking glare (element added by JS) */
+.card-glare { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(230px 230px at var(--gx,50%) var(--gy,50%), rgba(255,255,255,0.13), transparent 65%); }
+.game-card:hover .card-glare { opacity: 1; }
 
 .badge { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 800; letter-spacing: 1px;
   text-transform: uppercase; padding: 6px 12px; border-radius: 999px; }
@@ -337,11 +409,22 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
 .reqs b { color: var(--ink); text-align: right; }
 
 /* ---------- footer ---------- */
-.foot { max-width: var(--maxw); margin: 0 auto; padding: 40px clamp(20px,5vw,56px);
-  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+.foot { max-width: var(--maxw); margin: 0 auto; padding: 44px clamp(20px,5vw,56px) 40px;
   border-top: 1px solid var(--line); color: var(--ink-faint); font-size: 14px; }
+.foot-giant { font-family: 'Anton', sans-serif; font-size: clamp(60px, 13.5vw, 200px);
+  line-height: 0.95; text-align: center; letter-spacing: 4px; user-select: none;
+  color: transparent;
+  background: linear-gradient(90deg, var(--flame-3), var(--flame) 28%, var(--ember) 49.8%, rgba(255,255,255,0.06) 50.2%);
+  background-size: 205% 100%; background-position: 100% 0;
+  -webkit-background-clip: text; background-clip: text;
+  margin-bottom: 34px; }
+.foot-inner { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 .foot-mark { font-family: 'Anton', sans-serif; font-size: 22px; }
-.foot p { margin-right: auto; }
+.foot-inner p { margin-right: auto; }
+
+/* ---------- download spark burst (elements added by JS) ---------- */
+.spark { position: fixed; z-index: 250; width: 9px; height: 9px; border-radius: 2px;
+  pointer-events: none; }
 
 /* ---------- reveal animations ---------- */
 .reveal, .reveal-art, .reveal-up { opacity: 0; }
@@ -351,6 +434,9 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
 
 .reveal-up { transform: translateY(28px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); transition-delay: var(--d, 0ms); }
 .reveal-up.in { opacity: 1; transform: none; }
+
+/* when GSAP drives reveals, CSS transitions must not fight the tweens */
+html.gsap-on .reveal-up { transition: none; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {
@@ -376,4 +462,6 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
   .reveal, .reveal-art, .reveal-up { opacity: 1; transform: none; }
+  .loader, .cursor-dot, .cursor-ring, .bg-embers { display: none !important; }
+  .foot-giant { background-position: 0 0; }
 }

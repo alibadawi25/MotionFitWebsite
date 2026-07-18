@@ -11,9 +11,13 @@ MotionFit turns your webcam into a motion controller. The launcher bundles full-
 ```
 index.html    # Landing page markup
 styles.css    # Styles
-main.js       # Interactions
+main.js       # Interactions & animation choreography
 assets/       # Images and icons
+vendor/       # Vendored libraries: GSAP + ScrollTrigger (scroll animation), Lenis (smooth scroll)
 ```
+
+Motion degrades gracefully: without the vendor scripts the site falls back to
+IntersectionObserver reveals, and `prefers-reduced-motion` gets a fully static page.
 
 ## Running locally
 
