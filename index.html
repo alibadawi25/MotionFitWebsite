@@ -24,6 +24,9 @@
 </head>
 <body>
 
+<!-- scroll progress -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
 <!-- ambient motion background -->
 <div class="bg" aria-hidden="true">
   <div class="bg-grain"></div>
@@ -47,9 +50,9 @@
 
 <main>
   <!-- ============ HERO ============ -->
-  <section class="hero">
+  <section class="hero" id="hero">
     <div class="hero-copy">
-      <p class="eyebrow reveal" style="--d:0ms">Webcam-powered · No controller · Windows</p>
+      <p class="eyebrow reveal" style="--d:0ms"><span class="live-dot"></span>Webcam-powered · No controller · Windows</p>
       <h1 class="reveal" style="--d:80ms">
         YOUR BODY<br />IS THE<br /><span class="hl">CONTROLLER</span>
       </h1>
@@ -80,14 +83,31 @@
       </ul>
     </div>
 
-    <div class="hero-art reveal-art">
-      <div class="frame frame-main">
+    <div class="hero-art reveal-art" id="heroArt">
+      <div class="frame frame-main" data-parallax="18">
         <img src="assets/open-world.png" alt="Open World — a golden-hour coastline of grassy hills, sandy shore and distant mountains" loading="eager" />
         <span class="frame-tag">Open World</span>
       </div>
-      <div class="frame frame-sub">
+      <div class="frame frame-sub" data-parallax="34">
         <img src="assets/hurdle-dash.png" alt="Hurdle Dash — a four-lane stadium race mid-sprint, crowd packed into the stands" loading="lazy" />
         <span class="frame-tag">Hurdle Dash</span>
+      </div>
+
+      <!-- live fitness HUD overlay -->
+      <div class="hud" data-parallax="52" aria-hidden="true">
+        <div class="hud-row">
+          <span class="hud-label">Calories</span>
+          <span class="hud-val"><b data-hud="cal">0</b> kcal</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Heart rate</span>
+          <span class="hud-val"><b data-hud="bpm">0</b> bpm</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Steps</span>
+          <span class="hud-val"><b data-hud="steps">0</b></span>
+        </div>
+        <div class="hud-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
       </div>
     </div>
   </section>
@@ -108,8 +128,8 @@
 
   <!-- ============ STATS ============ -->
   <section class="stats">
-    <div class="stat reveal-up"><b>3</b><span>games live</span></div>
-    <div class="stat reveal-up" style="--d:80ms"><b>3</b><span>more coming</span></div>
+    <div class="stat reveal-up"><b data-count="3">0</b><span>games live</span></div>
+    <div class="stat reveal-up" style="--d:80ms"><b data-count="3">0</b><span>more coming</span></div>
     <div class="stat reveal-up" style="--d:160ms"><b>∞</b><span>open-world roaming</span></div>
     <div class="stat reveal-up" style="--d:240ms"><b>XP</b><span>levels &amp; achievements</span></div>
   </section>
@@ -139,6 +159,65 @@
     </ol>
   </section>
 
+  <!-- ============ SHOWCASE ============ -->
+  <section class="showcase" id="showcase">
+    <header class="section-head">
+      <p class="eyebrow">See it in motion</p>
+      <h2>Three worlds,<br /><span class="hl">one sweat session</span></h2>
+    </header>
+
+    <div class="show-row reveal-up">
+      <div class="show-art">
+        <img src="assets/zombie-run.png" alt="Zombie Run — a runner sprinting away from a zombie through a dusk village" loading="lazy" />
+        <span class="show-badge badge-live">Live</span>
+      </div>
+      <div class="show-copy">
+        <p class="show-kicker">Cardio · Full-body</p>
+        <h3>Zombie Run</h3>
+        <p class="show-desc">A zombie is on your heels and it does <em>not</em> get tired. March hard to hold your lead, then jump, slide and dodge everything the road throws at you. Pure fight-or-flight cardio.</p>
+        <ul class="show-feats">
+          <li>Sprint-in-place pace tracking</li>
+          <li>Real-time dodge &amp; jump detection</li>
+          <li>Escalating panic — the longer you last, the harder it pushes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="show-row reverse reveal-up">
+      <div class="show-art">
+        <img src="assets/hurdle-dash.png" alt="Hurdle Dash — four sprinters mid-race in a packed stadium" loading="lazy" />
+        <span class="show-badge badge-live">Live</span>
+      </div>
+      <div class="show-copy">
+        <p class="show-kicker">HIIT · Explosive</p>
+        <h3>Hurdle Dash</h3>
+        <p class="show-desc">Four lanes, three rivals, one line. Sprint on the spot to build speed, then explode upward to clear each hurdle clean. Short, breathless, all-out — the perfect interval burst.</p>
+        <ul class="show-feats">
+          <li>Head-to-head AI racers</li>
+          <li>Jump timing scored on every hurdle</li>
+          <li>Sub-two-minute rounds built for repeats</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="show-row reveal-up">
+      <div class="show-art">
+        <img src="assets/open-world.png" alt="Open World — a golden-hour coastline with hills, shore and open sea" loading="lazy" />
+        <span class="show-badge badge-live">Live</span>
+      </div>
+      <div class="show-copy">
+        <p class="show-kicker">Low-impact · Endless</p>
+        <h3>Open World</h3>
+        <p class="show-desc">No timer, no chase — just move and explore a golden-hour coastline at your own pace. Perfect for a warm-up, a cool-down, or a long easy session. It quietly counts every step and calorie the whole time.</p>
+        <ul class="show-feats">
+          <li>Free-roam, walk-anywhere world</li>
+          <li>Continuous step &amp; calorie tracking</li>
+          <li>Zero pressure — go as long as you like</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ GAMES ============ -->
   <section class="games" id="games">
     <header class="section-head">
@@ -147,7 +226,7 @@
     </header>
 
     <div class="game-grid">
-      <article class="game-card reveal-up">
+      <article class="game-card reveal-up tilt">
         <div class="game-shot"><img src="assets/zombie-run.png" alt="Zombie Run gameplay" loading="lazy" /></div>
         <div class="game-body">
           <span class="badge badge-live">Live</span>
@@ -156,7 +235,7 @@
         </div>
       </article>
 
-      <article class="game-card reveal-up" style="--d:100ms">
+      <article class="game-card reveal-up tilt" style="--d:100ms">
         <div class="game-shot"><img src="assets/hurdle-dash.png" alt="Hurdle Dash gameplay" loading="lazy" /></div>
         <div class="game-body">
           <span class="badge badge-live">Live</span>
@@ -165,7 +244,7 @@
         </div>
       </article>
 
-      <article class="game-card reveal-up" style="--d:200ms">
+      <article class="game-card reveal-up tilt" style="--d:200ms">
         <div class="game-shot"><img src="assets/open-world.png" alt="Open World gameplay" loading="lazy" /></div>
         <div class="game-body">
           <span class="badge badge-live">Live</span>
