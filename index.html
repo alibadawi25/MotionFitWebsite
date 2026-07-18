@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MotionFit — Your body is the controller</title>
+<meta name="description" content="MotionFit turns your webcam into a motion controller. A launcher full of full-body fitness mini-games — run from zombies, sprint the hurdles, roam an open world. Real calories, real sweat. Free for Windows." />
+
+<!-- Open Graph / social -->
+<meta property="og:title" content="MotionFit — Your body is the controller" />
+<meta property="og:description" content="Webcam-powered fitness gaming for Windows. Move to play. Free download." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/open-world.png" />
+<meta name="theme-color" content="#0b0a0c" />
+
+<link rel="icon" type="image/png" href="assets/icon.png" />
+
+<!-- Distinctive type: Anton (athletic condensed display) + Archivo (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ambient motion background -->
+<div class="bg" aria-hidden="true">
+  <div class="bg-grain"></div>
+  <div class="bg-ember"></div>
+  <div class="streak streak-1"></div>
+  <div class="streak streak-2"></div>
+  <div class="streak streak-3"></div>
+</div>
+
+<header class="nav" id="top">
+  <a class="wordmark" href="#top" aria-label="MotionFit home">
+    <span class="wordmark-motion">MOTION</span><span class="wordmark-fit">FIT</span>
+  </a>
+  <nav class="nav-links">
+    <a href="#games">Games</a>
+    <a href="#how">How it works</a>
+    <a href="#requirements">Requirements</a>
+  </nav>
+  <a class="btn btn-ghost nav-dl" href="#download">Download</a>
+</header>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow reveal" style="--d:0ms">Webcam-powered · No controller · Windows</p>
+      <h1 class="reveal" style="--d:80ms">
+        YOUR BODY<br />IS THE<br /><span class="hl">CONTROLLER</span>
+      </h1>
+      <p class="lede reveal" style="--d:200ms">
+        MotionFit is a launcher packed with full-body fitness mini-games. Your
+        webcam reads your movement — run, dodge, sprint and squat your way through
+        real workouts that don't feel like working out.
+      </p>
+
+      <div class="cta reveal" style="--d:320ms">
+        <a class="btn btn-primary" id="download" href="#" data-download>
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3v10.6l3.3-3.3 1.4 1.4L12 17.4 6.3 11.7l1.4-1.4L11 13.6V3h1zM5 19h14v2H5z"/></svg>
+          Download for Windows
+        </a>
+        <div class="cta-meta">
+          <span class="free">Free</span>
+          <span>·</span>
+          <span data-size>~99 MB</span>
+          <span>·</span>
+          <span>Windows 10/11 64-bit</span>
+        </div>
+      </div>
+
+      <ul class="chips reveal" style="--d:420ms">
+        <li>🎥 Webcam required</li>
+        <li>🔥 Real calorie tracking</li>
+        <li>🏃 Full-body motion</li>
+      </ul>
+    </div>
+
+    <div class="hero-art reveal-art">
+      <div class="frame frame-main">
+        <img src="assets/open-world.png" alt="Open World — a golden-hour coastline of grassy hills, sandy shore and distant mountains" loading="eager" />
+        <span class="frame-tag">Open World</span>
+      </div>
+      <div class="frame frame-sub">
+        <img src="assets/hurdle-dash.png" alt="Hurdle Dash — a four-lane stadium race mid-sprint, crowd packed into the stands" loading="lazy" />
+        <span class="frame-tag">Hurdle Dash</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>MOVE TO PLAY</span><span class="dot">●</span>
+      <span>BURN REAL CALORIES</span><span class="dot">●</span>
+      <span>NO CONTROLLER</span><span class="dot">●</span>
+      <span>JUST YOU + A WEBCAM</span><span class="dot">●</span>
+      <span>MOVE TO PLAY</span><span class="dot">●</span>
+      <span>BURN REAL CALORIES</span><span class="dot">●</span>
+      <span>NO CONTROLLER</span><span class="dot">●</span>
+      <span>JUST YOU + A WEBCAM</span><span class="dot">●</span>
+    </div>
+  </div>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats">
+    <div class="stat reveal-up"><b>3</b><span>games live</span></div>
+    <div class="stat reveal-up" style="--d:80ms"><b>3</b><span>more coming</span></div>
+    <div class="stat reveal-up" style="--d:160ms"><b>∞</b><span>open-world roaming</span></div>
+    <div class="stat reveal-up" style="--d:240ms"><b>XP</b><span>levels &amp; achievements</span></div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="how" id="how">
+    <header class="section-head">
+      <p class="eyebrow">The setup</p>
+      <h2>Up and moving in<br /><span class="hl">under a minute</span></h2>
+    </header>
+    <ol class="steps">
+      <li class="step reveal-up">
+        <span class="step-num">01</span>
+        <h3>Download &amp; install</h3>
+        <p>One installer, no account. It bundles the game and the motion engine — nothing else to set up.</p>
+      </li>
+      <li class="step reveal-up" style="--d:120ms">
+        <span class="step-num">02</span>
+        <h3>Stand in frame</h3>
+        <p>Give your webcam a clear view of your body. A quick calibration learns your stance and you're ready.</p>
+      </li>
+      <li class="step reveal-up" style="--d:240ms">
+        <span class="step-num">03</span>
+        <h3>Move to play</h3>
+        <p>March, jump, dodge and squat. Every game reads your real motion and counts every calorie and step.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ GAMES ============ -->
+  <section class="games" id="games">
+    <header class="section-head">
+      <p class="eyebrow">The line-up</p>
+      <h2>Pick your <span class="hl">sweat</span></h2>
+    </header>
+
+    <div class="game-grid">
+      <article class="game-card reveal-up">
+        <div class="game-shot"><img src="assets/zombie-run.png" alt="Zombie Run gameplay" loading="lazy" /></div>
+        <div class="game-body">
+          <span class="badge badge-live">Live</span>
+          <h3>Zombie Run</h3>
+          <p>A zombie is chasing you — march hard to escape, jump, slide and dodge. Pure cardio panic.</p>
+        </div>
+      </article>
+
+      <article class="game-card reveal-up" style="--d:100ms">
+        <div class="game-shot"><img src="assets/hurdle-dash.png" alt="Hurdle Dash gameplay" loading="lazy" /></div>
+        <div class="game-body">
+          <span class="badge badge-live">Live</span>
+          <h3>Hurdle Dash</h3>
+          <p>Race three rivals to the line — sprint on the spot and leap the hurdles. Short, breathless, all-out.</p>
+        </div>
+      </article>
+
+      <article class="game-card reveal-up" style="--d:200ms">
+        <div class="game-shot"><img src="assets/open-world.png" alt="Open World gameplay" loading="lazy" /></div>
+        <div class="game-body">
+          <span class="badge badge-live">Live</span>
+          <h3>Open World</h3>
+          <p>Free-roam and vibe. Move your body to explore — it counts your steps and calories the whole time.</p>
+        </div>
+      </article>
+
+      <article class="game-card ghost reveal-up">
+        <div class="game-body">
+          <span class="badge badge-soon">Coming soon</span>
+          <h3>Boxing</h3>
+          <p>Throw punches to hit targets. Upper-body burn.</p>
+        </div>
+      </article>
+
+      <article class="game-card ghost reveal-up" style="--d:100ms">
+        <div class="game-body">
+          <span class="badge badge-soon">Coming soon</span>
+          <h3>Football</h3>
+          <p>Kick, dodge and score. Full-body movement.</p>
+        </div>
+      </article>
+
+      <article class="game-card ghost reveal-up" style="--d:200ms">
+        <div class="game-body">
+          <span class="badge badge-soon">Coming soon</span>
+          <h3>Tennis</h3>
+          <p>Rally against the AI. Reflex and reach.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ REQUIREMENTS / DOWNLOAD ============ -->
+  <section class="download-band" id="requirements">
+    <div class="db-inner">
+      <div class="db-copy">
+        <p class="eyebrow">Get moving</p>
+        <h2>Download <span class="hl">MotionFit</span></h2>
+        <p class="lede">Free, for Windows 10 &amp; 11. All you need is a webcam and a bit of room to move.</p>
+
+        <a class="btn btn-primary btn-lg" href="#" data-download>
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M12 3v10.6l3.3-3.3 1.4 1.4L12 17.4 6.3 11.7l1.4-1.4L11 13.6V3h1zM5 19h14v2H5z"/></svg>
+          Download the installer
+        </a>
+        <p class="db-sub"><span data-size>~99 MB</span> · MotionFit-Setup.exe</p>
+
+        <div class="notice">
+          <strong>⚠️ Heads-up on first launch:</strong> because the installer isn't
+          code-signed yet, Windows SmartScreen may say “Windows protected your PC.”
+          Click <b>More info → Run anyway</b> — it's safe, just new.
+        </div>
+      </div>
+
+      <ul class="reqs">
+        <li><span>OS</span><b>Windows 10 / 11 · 64-bit</b></li>
+        <li><span>Camera</span><b>Any webcam (built-in or USB)</b></li>
+        <li><span>Space</span><b>Room to step, march &amp; jump</b></li>
+        <li><span>Install size</span><b>~316 MB on disk</b></li>
+        <li><span>Optional</span><b>Bluetooth heart-rate strap</b></li>
+        <li><span>Price</span><b class="free-b">Free</b></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-mark"><span class="wordmark-motion">MOTION</span><span class="wordmark-fit">FIT</span></div>
+  <p>Move · Play · Level up. &nbsp;© <span data-year>2026</span> MotionFit.</p>
+  <a class="btn btn-ghost" href="#download" data-download>Download</a>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
