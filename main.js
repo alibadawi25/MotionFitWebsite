@@ -510,7 +510,10 @@ function kineticPath() {
     const fromRight = row.classList.contains("reverse");
     gsap.fromTo(art,
       { clipPath: fromRight ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)" },
+      // clearProps: a lingering inline clip-path makes Chrome square off the
+      // Live badge's backdrop-filter region
       { clipPath: "inset(0 0% 0 0%)", duration: 1.1, ease: "power4.inOut",
+        clearProps: "clipPath",
         scrollTrigger: { trigger: row, start: "top 74%", once: true } });
     if (img) {
       gsap.fromTo(img, { scale: 1.3 },
