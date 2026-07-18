@@ -400,7 +400,12 @@ function kineticPath() {
   const lbar = $("#loaderBar");
   const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
+  const loaderLogo = $("#loaderLogo");
   if (loader && word && lbar && !seenIntro) {
+    if (loaderLogo) {
+      tl.fromTo(loaderLogo, { scale: 0, autoAlpha: 0, rotation: -14 },
+        { scale: 1, autoAlpha: 1, rotation: 0, duration: 0.34, ease: "back.out(2.2)" }, 0);
+    }
     const flash = (w) => {
       tl.call(() => { word.textContent = w; });
       tl.fromTo(word, { opacity: 0, scale: 0.7, y: 16 },

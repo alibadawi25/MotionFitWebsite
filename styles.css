@@ -41,7 +41,18 @@ html.lenis-on { scroll-behavior: auto; }
     var(--bg);
   transition: opacity 0.45s ease, visibility 0.45s; }
 .loader.done { opacity: 0; visibility: hidden; }
-.loader-inner { display: grid; justify-items: center; gap: 34px; }
+.loader-inner { display: grid; justify-items: center; gap: 30px; }
+.loader-logo-wrap { line-height: 0; }
+.loader-logo { width: 68px; height: 68px; border-radius: 17px;
+  box-shadow: 0 0 44px rgba(255,122,24,0.4), 0 14px 34px -12px rgba(0,0,0,0.8);
+  animation: heartbeat 1.5s ease-in-out infinite; }
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.14); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  56% { transform: scale(1); }
+}
 .loader-word { font-family: 'Anton', sans-serif; font-size: clamp(56px, 13vw, 150px);
   line-height: 1; letter-spacing: 4px; text-transform: uppercase; color: var(--ink);
   opacity: 0; }
@@ -121,8 +132,14 @@ html.cursor-on body, html.cursor-on a, html.cursor-on .btn, html.cursor-on butto
   background: linear-gradient(180deg, rgba(11,10,12,0.94), rgba(11,10,12,0.78)); }
 .nav.is-hidden { transform: translateY(-103%); }
 
-.wordmark { font-family: 'Anton', sans-serif; font-size: 26px; letter-spacing: 0.5px;
+.wordmark { display: inline-flex; align-items: center; gap: 11px;
+  font-family: 'Anton', sans-serif; font-size: 26px; letter-spacing: 0.5px;
   text-decoration: none; line-height: 1; }
+.nav-logo { width: 32px; height: 32px; border-radius: 9px;
+  box-shadow: 0 0 0 1px var(--line), 0 4px 14px -4px rgba(255,122,24,0.5);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s; }
+.wordmark:hover .nav-logo { transform: rotate(-8deg) scale(1.08);
+  box-shadow: 0 0 0 1px var(--line-hot), 0 6px 20px -4px rgba(255,122,24,0.75); }
 .wordmark-motion { color: var(--ink); }
 .wordmark-fit { color: var(--flame); }
 
@@ -419,7 +436,10 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
   -webkit-background-clip: text; background-clip: text;
   margin-bottom: 34px; }
 .foot-inner { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-.foot-mark { font-family: 'Anton', sans-serif; font-size: 22px; }
+.foot-mark { display: inline-flex; align-items: center; gap: 9px;
+  font-family: 'Anton', sans-serif; font-size: 22px; }
+.foot-logo { width: 26px; height: 26px; border-radius: 7px;
+  box-shadow: 0 0 0 1px var(--line); }
 .foot-inner p { margin-right: auto; }
 
 /* ---------- download spark burst (elements added by JS) ---------- */
