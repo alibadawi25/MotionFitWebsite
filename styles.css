@@ -29,6 +29,9 @@
 
 html { scroll-behavior: smooth; }
 
+/* offset in-page anchors so the sticky header doesn't cover them */
+.hero, .how, .games, .showcase, .download-band { scroll-margin-top: 88px; }
+
 /* ---------- scroll progress ---------- */
 .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
   z-index: 100; transform-origin: 0 0;
@@ -269,7 +272,7 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
 .show-art::after { content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, transparent 50%, rgba(11,10,12,0.5));
   pointer-events: none; }
-.show-badge { position: absolute; top: 14px; left: 14px; z-index: 2; }
+.show-badge { position: absolute; top: 14px; left: 14px; z-index: 2; box-shadow: 0 6px 18px rgba(0,0,0,0.45); }
 .show-kicker { text-transform: uppercase; letter-spacing: 2.5px; font-size: 12px; font-weight: 700;
   color: var(--flame-2); margin-bottom: 12px; }
 .show-copy h3 { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
@@ -296,9 +299,12 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--flame-3); outline
 .game-body h3 { font-size: 23px; margin: 12px 0 8px; letter-spacing: 0.2px; }
 .game-body p { color: var(--ink-mute); font-size: 14.5px; }
 
-.badge { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 1px;
-  text-transform: uppercase; padding: 5px 11px; border-radius: 999px; }
-.badge-live { color: #0e1a00; background: var(--lime); }
+.badge { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 800; letter-spacing: 1px;
+  text-transform: uppercase; padding: 6px 12px; border-radius: 999px; }
+.badge-live { color: var(--lime); background: rgba(11,10,12,0.66);
+  border: 1px solid rgba(198,255,74,0.38); backdrop-filter: blur(6px); }
+.badge-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--lime);
+  box-shadow: 0 0 8px rgba(198,255,74,0.9); animation: livePulse 1.6s var(--ease) infinite; }
 .badge-soon { color: var(--ink-mute); background: rgba(255,255,255,0.05); border: 1px solid var(--line); }
 
 .game-card.ghost { background: repeating-linear-gradient(135deg, var(--panel), var(--panel) 12px, rgba(30,26,34,0.6) 12px, rgba(30,26,34,0.6) 24px); }
