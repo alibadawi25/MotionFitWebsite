@@ -197,6 +197,48 @@ body {
   font-size: clamp(34px,5vw,64px); line-height: 0.98; text-transform: uppercase; letter-spacing: 0.5px; }
 .section { max-width: var(--maxw); margin: 0 auto; }
 
+/* ---------- motion-capture band ---------- */
+.mocap-band { max-width: var(--maxw); margin: clamp(70px,10vw,120px) auto; padding: 0 clamp(20px,5vw,56px);
+  display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px,5vw,64px); align-items: center; }
+.mocap-visual { position: relative; border-radius: 22px; overflow: hidden; aspect-ratio: 5/6;
+  border: 1px solid var(--line-hot); box-shadow: var(--shadow); color: var(--flame);
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(255,122,24,0.14), transparent 60%),
+    linear-gradient(180deg, #14111a, #0c0a0e); }
+.mocap-scanlines { position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background: repeating-linear-gradient(180deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 4px); }
+.mocap-svg { position: relative; width: 100%; height: 100%; display: block; }
+
+.mocap-svg .brackets { opacity: 0.85; animation: bracketPulse 3s var(--ease) infinite; }
+@keyframes bracketPulse { 0%,100%{opacity:0.4} 50%{opacity:0.9} }
+
+.mocap-svg .bbox { fill: none; stroke: rgba(255,122,24,0.55); stroke-width: 1.5; stroke-dasharray: 7 7;
+  transform-box: fill-box; transform-origin: center; animation: bboxBreathe 4s var(--ease) infinite; }
+@keyframes bboxBreathe { 0%,100%{transform:scale(1);opacity:0.6} 50%{transform:scale(1.015);opacity:0.9} }
+
+.mocap-svg .bones { stroke: var(--flame-2); stroke-width: 3; opacity: 0.6; }
+.mocap-svg .bone-head { stroke: var(--flame-2); stroke-width: 3; opacity: 0.6; }
+
+.mocap-svg .joints circle { fill: var(--flame-3);
+  transform-box: fill-box; transform-origin: center;
+  animation: jointPulse 1.7s var(--ease) infinite; animation-delay: var(--jd,0ms);
+  filter: drop-shadow(0 0 4px rgba(255,154,61,0.8)); }
+@keyframes jointPulse { 0%,100%{transform:scale(1);opacity:0.85} 50%{transform:scale(1.55);opacity:1} }
+
+.mocap-svg .scan { fill: var(--flame-3); opacity: 0.55;
+  filter: drop-shadow(0 0 8px rgba(255,122,24,0.9));
+  transform-box: view-box; transform-origin: center;
+  animation: scanSweep 3.4s var(--ease) infinite; }
+@keyframes scanSweep { 0%{transform:translateY(0);opacity:0} 8%{opacity:0.7} 92%{opacity:0.7} 100%{transform:translateY(405px);opacity:0} }
+
+.mocap-rec, .mocap-kp { position: absolute; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--ink); padding: 6px 11px; border-radius: 999px;
+  background: rgba(11,10,12,0.72); border: 1px solid var(--line); backdrop-filter: blur(6px); }
+.mocap-rec { top: 14px; left: 14px; display: inline-flex; align-items: center; gap: 7px; }
+.mocap-kp { bottom: 14px; right: 14px; color: var(--flame-2); }
+.rec-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff3b30;
+  box-shadow: 0 0 8px #ff3b30; animation: livePulse 1.4s var(--ease) infinite; }
+
 /* ---------- how ---------- */
 .how, .games { max-width: var(--maxw); margin: clamp(70px,10vw,120px) auto; padding: 0 clamp(20px,5vw,56px); }
 .steps { list-style: none; display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
@@ -308,6 +350,8 @@ body {
   .show-row, .show-row.reverse { grid-template-columns: 1fr; gap: 22px; }
   .show-row.reverse .show-art { order: 0; }
   .hud { width: 168px; right: 4%; bottom: 4%; }
+  .mocap-band { grid-template-columns: 1fr; gap: 26px; }
+  .mocap-visual { max-width: 360px; margin: 0 auto; width: 100%; }
 }
 @media (max-width: 520px) {
   .stats { grid-template-columns: 1fr 1fr; }
