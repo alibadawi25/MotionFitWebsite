@@ -10,3 +10,6 @@ desktop.ini
 
 # Dependencies (if any tooling is added later)
 node_modules/
+
+# Dev-tool output
+tools/shots/

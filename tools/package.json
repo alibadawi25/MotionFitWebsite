@@ -1,0 +1,9 @@
+{
+  "name": "motionfit-tools",
+  "private": true,
+  "type": "module",
+  "description": "Dev helpers for the MotionFit landing page (kept out of the site itself)",
+  "dependencies": {
+    "puppeteer-core": "^24.0.0"
+  }
+}
